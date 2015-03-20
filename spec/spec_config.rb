@@ -4,8 +4,6 @@ require 'pry'
 require 'aop-client'
 require 'generator_spec'
 
-Pry.config.pager = false
-
 def root_path(path='')
   Pathname.new(File.join(File.dirname(__FILE__), path))
 end
