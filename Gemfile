@@ -11,6 +11,5 @@ group :development, :test do
   gem 'rails',              '~> 4.1'
   gem 'simplecov',          '~> 0.9',   require: false
   gem 'pry',                '~> 0.10',  require: false
-  gem 'shoulda-matchers',   '~> 2.8',   require: false
   gem 'generator_spec',     '~> 0.9',   require: false
 end
