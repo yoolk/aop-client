@@ -1,10 +1,10 @@
 require 'active_model'
+require 'active_support'
 require 'erb'
 require 'yaml'
 require 'aop-client/version'
 require 'aop-client/config'
+require 'aop-client/api'
+require 'aop-client/resource'
 
 require 'generators/aop-client/install_generator'
-
-module AopClient
-end

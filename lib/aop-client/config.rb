@@ -6,14 +6,25 @@ module AopClient
     attr_accessor :app_key
     attr_accessor :app_secret
     attr_accessor :api_entry
+    attr_accessor :access_token
+    attr_accessor :sign_method
+    attr_accessor :format
+    attr_accessor :version
 
     ## Validations
-    validates :app_key,     presence: true
-    validates :app_secret,  presence: true
-    validates :api_entry,   presence: true
+    validates! :app_key,     presence: true
+    validates! :app_secret,  presence: true
+    validates! :api_entry,   presence: true
 
-    def initialize
+    def initialize(access_token=nil)
+      self.access_token = access_token
+      self.sign_method  = 'md5'
+      self.format       = 'json'
+      self.version      = '2.0'
+
       load_yml! if defined?(Rails) && yml_exists?
+
+      valid?
     end
 
     def yml_exists?
