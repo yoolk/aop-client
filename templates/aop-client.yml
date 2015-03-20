@@ -1,0 +1,23 @@
+# Be sure to restart your server when you modify this file.
+
+# Your configuration file of Alibaba App.
+
+# Make sure the secrets in this file are kept private
+# if you're sharing your code publicly.
+
+development:
+  app_key:    <%= app_key %>
+  app_secret: <%= app_secret %>
+  api_entry:  <%= api_entry %>
+
+test:
+  app_key:    <%= app_key %>
+  app_secret: <%= app_secret %>
+  api_entry:  <%= api_entry %>
+
+# Do not keep production secrets in the repository,
+# instead read values from the environment.
+production:
+  app_key:    <%%= ENV['ALIBABA_APP_KEY'] %>
+  app_secret: <%%= ENV['ALIBABA_APP_SECRET'] %>
+  api_entry:  <%%= ENV['ALIBABA_API_ENTRY'] %>
