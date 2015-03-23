@@ -27,14 +27,21 @@ RSpec.describe AopClient::API, :with_rails do
     end
 
     it 'photobank.list' do
-      hash = { extra_context: 'key=value', current_page: 1, group_id: 1,
+      hash = { extra_context: 'key:value', current_page: 1, group_id: 1,
         location_type: 'ALL_GROUP', page_size: 20 }
       expect(AopClient::Resource::PhotobankList).to receive(:new).with(hash).and_call_original
 
       subject.call('photobank.list', hash)
     end
 
-    it 'photobank.upload'
+    it 'photobank.upload' do
+      hash = { extra_context: 'key:value', current_page: 1, group_id: 1,
+        location_type: 'ALL_GROUP', page_size: 20 }
+      expect(AopClient::Resource::PhotobankUpload).to receive(:new).with(hash).and_call_original
+
+      subject.call('photobank.upload', hash)
+    end
+
     it 'open.product.post'
   end
 end

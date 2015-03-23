@@ -11,10 +11,16 @@ module AopClient
       attr_accessor :page_size
 
       ## Validations
-      validates! :current_page,   numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
-      validates! :page_size,      numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
-      validates! :group_id,       numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
-      validates! :location_type,  inclusion: %w(ALL_GROUP SUB_GROUP UNGROUP), allow_blank: true
+      validates! :current_page,   numericality: { only_integer: true, greater_than: 0 },
+                                  allow_blank: true
+      validates! :page_size,      numericality: { only_integer: true, greater_than: 0 },
+                                  allow_blank: true
+      validates! :group_id,       numericality: { only_integer: true, greater_than: 0 },
+                                  allow_blank: true
+      validates! :location_type,  inclusion: %w(ALL_GROUP SUB_GROUP UNGROUP),
+                                  allow_blank: true
+      validates! :extra_context,  format: /\A([a-z0-9]+:[a-z0-9]+)(,[a-z0-9]+:[a-z0-9]+)*\z/i,
+                                  allow_blank: true
 
       def initialize(**options)
         options = options.assert_valid_keys(:extra_context, :current_page, :group_id,
