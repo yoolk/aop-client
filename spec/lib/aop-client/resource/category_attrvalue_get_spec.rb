@@ -6,40 +6,18 @@ RSpec.describe AopClient::Resource::CategoryAttrvalueGet do
       }.not_to raise_error
     end
 
-    it 'attribute_id must be formated "1,2"' do
-      expect{
-        described_class.new(cat_id: 0, attribute_id: '1,2')
-      }.not_to raise_error
+    it 'format_of attribute_id' do
+      validator = described_class.validators_on(:attribute_id)[0]
+
+      expect(validator).to be_a AopClient::CommaNumericValidator
+      expect(validator.options).to eq({allow_blank: true, strict: true})
     end
 
-    it 'unaccepted attribute_id formated "A"' do
-      expect{
-        described_class.new(cat_id: 0, attribute_id: 'A')
-      }.to raise_error.with_message(/Attribute is invalid/)
-    end
+    it 'format_of attribute_value_id' do
+      validator = described_class.validators_on(:attribute_value_id)[0]
 
-    it 'unaccepted attribute_id formated "1, 2"' do
-      expect{
-        described_class.new(cat_id: 0, attribute_id: '1, 2')
-      }.to raise_error.with_message(/Attribute is invalid/)
-    end
-
-    it 'attribute_value_id must be formated "1,2"' do
-      expect{
-        described_class.new(cat_id: 0, attribute_value_id: '1,2')
-      }.not_to raise_error
-    end
-
-    it 'unaccepted attribute_value_id formated "A"' do
-      expect{
-        described_class.new(cat_id: 0, attribute_value_id: 'A')
-      }.to raise_error.with_message(/Attribute value is invalid/)
-    end
-
-    it 'unaccepted attribute_value_id formated "1, 2"' do
-      expect{
-        described_class.new(cat_id: 0, attribute_value_id: '1, 2')
-      }.to raise_error.with_message(/Attribute value is invalid/)
+      expect(validator).to be_a AopClient::CommaNumericValidator
+      expect(validator.options).to eq({allow_blank: true, strict: true})
     end
   end
 

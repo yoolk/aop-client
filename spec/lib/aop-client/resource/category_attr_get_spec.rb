@@ -6,22 +6,11 @@ RSpec.describe AopClient::Resource::CategoryAttrGet do
       }.not_to raise_error
     end
 
-    it 'attr_id must be formated "1,2"' do
-      expect{
-        described_class.new(cat_id: 0, attr_id: '1,2')
-      }.not_to raise_error
-    end
+    it 'format_of attr_id' do
+      validator = described_class.validators_on(:attr_id)[0]
 
-    it 'unaccepted extra_context formated "A"' do
-      expect{
-        described_class.new(cat_id: 0, attr_id: 'A')
-      }.to raise_error.with_message(/Attr is invalid/)
-    end
-
-    it 'unaccepted extra_context formated "1, 2"' do
-      expect{
-        described_class.new(cat_id: 0, attr_id: '1, 2')
-      }.to raise_error.with_message(/Attr is invalid/)
+      expect(validator).to be_a AopClient::CommaNumericValidator
+      expect(validator.options).to eq({allow_blank: true, strict: true})
     end
   end
 

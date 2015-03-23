@@ -6,7 +6,7 @@ if ENV['COVERAGE'] || ENV['CI']
 
     add_group 'Generators',   'lib/generators'
     add_group 'Validators',   'lib/validators'
-    add_group 'Resources',    'lib/aop-client/resources'
+    add_group 'Resources',    'lib/aop-client/resource'
     add_group 'Libraries',    'lib/aop-client'
   end
 end

@@ -24,28 +24,11 @@ RSpec.describe AopClient::Resource::PhotobankList do
       }.not_to raise_error
     end
 
-    it 'extra_context must be formated "key:value,k:v"' do
-      expect{
-        described_class.new(extra_context: 'key:value,k:v')
-      }.not_to raise_error
-    end
+    it 'format_of extra_context' do
+      validator = described_class.validators_on(:extra_context)[0]
 
-    it 'unaccepted extra_context formated "key: value"' do
-      expect{
-        described_class.new(extra_context: 'key: value')
-      }.to raise_error.with_message(/Extra context is invalid/)
-    end
-
-    it 'unaccepted extra_context formated "key:value:key"' do
-      expect{
-        described_class.new(extra_context: 'key:value:key')
-      }.to raise_error.with_message(/Extra context is invalid/)
-    end
-
-    it 'unaccepted extra_context formated " key:value"' do
-      expect{
-        described_class.new(extra_context: ' key:value')
-      }.to raise_error.with_message(/Extra context is invalid/)
+      expect(validator).to be_a AopClient::CommaKeyValueValidator
+      expect(validator.options).to eq({allow_blank: true, strict: true})
     end
   end
 

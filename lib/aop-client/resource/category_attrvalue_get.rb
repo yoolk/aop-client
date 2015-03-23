@@ -11,8 +11,8 @@ module AopClient
       ## Validations
       validates! :cat_id,   presence: true,
                             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-      validates! :attribute_id,       format: /\A(\d+)(,\d+)*\z/, allow_blank: true
-      validates! :attribute_value_id, format: /\A(\d+)(,\d+)*\z/, allow_blank: true
+      validates! :attribute_id,       'aop_client/comma_numeric' => true, allow_blank: true
+      validates! :attribute_value_id, 'aop_client/comma_numeric' => true, allow_blank: true
 
       def initialize(**options)
         options = options.assert_valid_keys(:cat_id, :attribute_id, :attribute_value_id)

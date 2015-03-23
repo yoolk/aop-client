@@ -19,7 +19,7 @@ module AopClient
                                   allow_blank: true
       validates! :location_type,  inclusion: %w(ALL_GROUP SUB_GROUP UNGROUP),
                                   allow_blank: true
-      validates! :extra_context,  format: /\A([a-z0-9]+:[a-z0-9]+)(,[a-z0-9]+:[a-z0-9]+)*\z/i,
+      validates! :extra_context,  'aop_client/comma_key_value' => true,
                                   allow_blank: true
 
       def initialize(**options)
