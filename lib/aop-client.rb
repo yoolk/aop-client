@@ -11,4 +11,4 @@ require 'aop-client/config'
 require 'aop-client/api'
 require 'aop-client/resource'
 
-require 'generators/aop-client/install_generator'
+require 'generators/aop-client/install_generator' if defined?(Rails)

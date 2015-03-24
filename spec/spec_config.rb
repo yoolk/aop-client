@@ -1,4 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'dotenv'
+Dotenv.load
 require 'coverage_config'
 require 'pry'
 require 'aop-client'

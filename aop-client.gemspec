@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency 'activemodel'
+  spec.add_dependency 'typhoeus'
 end

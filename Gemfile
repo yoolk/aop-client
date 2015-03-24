@@ -12,4 +12,5 @@ group :development, :test do
   gem 'simplecov',          '~> 0.9',   require: false
   gem 'pry',                '~> 0.10',  require: false
   gem 'generator_spec',     '~> 0.9',   require: false
+  gem 'dotenv',             '~> 2.0'
 end
