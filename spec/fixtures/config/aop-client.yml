@@ -6,11 +6,13 @@
 # if you're sharing your code publicly.
 
 development:
-  app_key:    <%= 'test_app_key' %>
-  app_secret: <%= 'test_app_secret' %>
-  api_entry:  <%= 'test_api_entry' %>
+  app_key:      <%= ENV['ALIBABA_APP_KEY']     %>
+  app_secret:   <%= ENV['ALIBABA_APP_SECRET']  %>
+  api_entry:    <%= ENV['ALIBABA_API_ENTRY']   %>
+  oauth_entry:  <%= ENV['ALIBABA_OAUTH_ENTRY'] %>
 
 test:
-  app_key:    <%= 'test_app_key' %>
-  app_secret: <%= 'test_app_secret' %>
-  api_entry:  <%= 'test_api_entry' %>
+  app_key:      <%= ENV['ALIBABA_APP_KEY']     %>
+  app_secret:   <%= ENV['ALIBABA_APP_SECRET']  %>
+  api_entry:    <%= ENV['ALIBABA_API_ENTRY']   %>
+  oauth_entry:  <%= ENV['ALIBABA_OAUTH_ENTRY'] %>

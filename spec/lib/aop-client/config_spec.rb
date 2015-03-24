@@ -5,8 +5,9 @@ RSpec.describe AopClient::Config do
       subject = described_class.new
     }.not_to raise_error
 
-    expect(subject.app_key).to    eq 'test_app_key'
-    expect(subject.app_secret).to eq 'test_app_secret'
-    expect(subject.api_entry).to  eq 'test_api_entry'
+    expect(subject.app_key).not_to      eq nil
+    expect(subject.app_secret).not_to   eq nil
+    expect(subject.api_entry).not_to    eq nil
+    expect(subject.oauth_entry).not_to  eq nil
   end
 end

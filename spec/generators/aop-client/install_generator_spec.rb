@@ -1,3 +1,5 @@
+require 'generators/aop-client/install_generator'
+
 RSpec.describe AopClient::InstallGenerator, type: :generator do
   destination File.expand_path('../../../tmp', __FILE__)
 
@@ -13,8 +15,8 @@ RSpec.describe AopClient::InstallGenerator, type: :generator do
 
     content = YAML.load(ERB.new(IO.read(config_file)).result)
 
-    expect(content['development'].keys).to  eq %w(app_key app_secret api_entry)
-    expect(content['test'].keys).to         eq %w(app_key app_secret api_entry)
-    expect(content['production'].keys).to   eq %w(app_key app_secret api_entry)
+    expect(content['development'].keys).to  eq %w(app_key app_secret api_entry oauth_entry)
+    expect(content['test'].keys).to         eq %w(app_key app_secret api_entry oauth_entry)
+    expect(content['production'].keys).to   eq %w(app_key app_secret api_entry oauth_entry)
   end
 end
