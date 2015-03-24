@@ -28,6 +28,10 @@ module AopClient
         { attribute_request: hash.to_json }
       end
 
+      def require_access_token?
+        false
+      end
+
     end
   end
 end

@@ -46,6 +46,10 @@ module AopClient
         hash
       end
 
+      def require_access_token?
+        true
+      end
+
     end
   end
 end

@@ -6,6 +6,7 @@ module AopClient
     attr_accessor :app_key
     attr_accessor :app_secret
     attr_accessor :api_entry
+    attr_accessor :oauth_entry
     attr_accessor :access_token
     attr_accessor :sign_method
     attr_accessor :format
@@ -15,9 +16,10 @@ module AopClient
     validates! :app_key,     presence: true
     validates! :app_secret,  presence: true
     validates! :api_entry,   presence: true
+    validates! :oauth_entry, presence: true
 
     def initialize(access_token=nil)
-      self.access_token = access_token
+      self.access_token = access_token.to_s
       self.sign_method  = 'md5'
       self.format       = 'json'
       self.version      = '2.0'
@@ -44,9 +46,10 @@ module AopClient
     end
 
     def load_yml!
-      self.app_key    = yml['app_key']
-      self.app_secret = yml['app_secret']
-      self.api_entry  = yml['api_entry']
+      self.app_key      = yml['app_key']
+      self.app_secret   = yml['app_secret']
+      self.api_entry    = yml['api_entry']
+      self.oauth_entry  = yml['oauth_entry']
     end
 
   end

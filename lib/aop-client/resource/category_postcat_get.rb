@@ -24,6 +24,10 @@ module AopClient
         { post_cat_request: hash.to_json }
       end
 
+      def require_access_token?
+        false
+      end
+
     end
   end
 end

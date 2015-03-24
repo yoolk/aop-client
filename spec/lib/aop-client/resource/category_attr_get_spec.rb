@@ -28,4 +28,8 @@ RSpec.describe AopClient::Resource::CategoryAttrGet do
       expect(subject.request_params).to eq({ attribute_request: hash.to_json })
     end
   end
+
+  it '#require_access_token?' do
+    expect(subject.require_access_token?).to eq false
+  end
 end

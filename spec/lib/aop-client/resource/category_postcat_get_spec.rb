@@ -13,4 +13,8 @@ RSpec.describe AopClient::Resource::CategoryPostcatGet do
   it '#request_params' do
     expect(subject.request_params).to eq({ post_cat_request: hash.to_json })
   end
+
+  it '#require_access_token?' do
+    expect(subject.require_access_token?).to eq false
+  end
 end

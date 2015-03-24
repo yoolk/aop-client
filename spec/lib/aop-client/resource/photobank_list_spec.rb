@@ -50,4 +50,8 @@ RSpec.describe AopClient::Resource::PhotobankList do
       expect(subject.request_params).to eq(hash)
     end
   end
+
+  it '#require_access_token?' do
+    expect(subject.require_access_token?).to eq true
+  end
 end
