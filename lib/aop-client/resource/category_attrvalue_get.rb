@@ -1,8 +1,6 @@
 module AopClient
   module Resource
-    class CategoryAttrvalueGet
-      include ActiveModel::Validations
-
+    class CategoryAttrvalueGet < Base
       ## Attributes
       attr_accessor :cat_id
       attr_accessor :attribute_id
@@ -30,10 +28,6 @@ module AopClient
         hash.merge!(attribute_value_id: attribute_value_id) if attribute_value_id.present?
 
         { attribute_value_request: hash.to_json }
-      end
-
-      def require_access_token?
-        false
       end
 
     end

@@ -1,0 +1,6 @@
+require 'aop-client/response/base'
+require 'aop-client/response/category_postcat_get'
+require 'aop-client/response/category_attr_get'
+require 'aop-client/response/category_attrvalue_get'
+require 'aop-client/response/photobank_list'
+require 'aop-client/response/photobank_upload'

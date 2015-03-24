@@ -1,8 +1,6 @@
 module AopClient
   module Resource
-    class PhotobankUpload
-      include ActiveModel::Validations
-
+    class PhotobankUpload < Base
       ## Attributes
       attr_accessor :extra_context
       attr_accessor :file_name

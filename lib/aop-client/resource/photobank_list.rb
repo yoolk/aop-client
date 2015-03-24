@@ -1,8 +1,6 @@
 module AopClient
   module Resource
-    class PhotobankList
-      include ActiveModel::Validations
-
+    class PhotobankList < Base
       ## Attributes
       attr_accessor :extra_context
       attr_accessor :current_page

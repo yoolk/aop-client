@@ -1,8 +1,6 @@
 module AopClient
   module Resource
-    class CategoryPostcatGet
-      include ActiveModel::Validations
-
+    class CategoryPostcatGet < Base
       ## Attributes
       attr_accessor :cat_id
 
@@ -22,10 +20,6 @@ module AopClient
         hash = { cat_id: cat_id }
 
         { post_cat_request: hash.to_json }
-      end
-
-      def require_access_token?
-        false
       end
 
     end
