@@ -13,4 +13,6 @@ group :development, :test do
   gem 'pry',                '~> 0.10',  require: false
   gem 'generator_spec',     '~> 0.9',   require: false
   gem 'dotenv',             '~> 2.0'
+  gem 'vcr',                '~> 2.9'
+  gem 'webmock',            '~> 1.20'
 end

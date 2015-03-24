@@ -1,10 +1,21 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'dotenv'
-Dotenv.load
 require 'coverage_config'
 require 'pry'
 require 'aop-client'
 require 'generator_spec'
+require 'vcr'
+require 'webmock'
+
+Dotenv.load
+
+VCR.configure do |config|
+  config.configure_rspec_metadata!
+  config.cassette_library_dir = 'spec/vcr_cassettes'
+  config.hook_into :webmock
+  config.ignore_hosts 'coveralls.io'
+  config.default_cassette_options = { record: :new_episodes }
+end
 
 def root_path(path='')
   Pathname.new(File.join(File.dirname(__FILE__), path))
