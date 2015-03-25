@@ -4,11 +4,12 @@ RSpec.describe AopClient::OAuth, :with_rails do
 
   describe '#exchange_code' do
     it 'when success'
-    it 'when error', vcr: { cassette_name: 'error_exchange_code' } do
+    xit 'when error' do
       response = subject.exchange_code
 
-      expect(response.error_code).to    eq 'invalid_request'
-      expect(response.error_message).to eq 'response_type is empty'
+      expect(response.error).to be_present
+      expect(response.error[:code]).to    eq 'invalid_request'
+      expect(response.error[:message]).to eq 'response_type is empty'
     end
   end
 

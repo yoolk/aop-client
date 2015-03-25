@@ -15,4 +15,5 @@ group :development, :test do
   gem 'dotenv',             '~> 2.0'
   gem 'vcr',                '~> 2.9'
   gem 'webmock',            '~> 1.20'
+  gem 'rubocop',            '~> 0.29',  require: false
 end
