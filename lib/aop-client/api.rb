@@ -1,10 +1,9 @@
 module AopClient
   class API
-
     ## Attributes
     attr_reader :config, :alibaba_method, :system_params
 
-    def initialize(access_token=nil)
+    def initialize(access_token = nil)
       @api            = nil
       @system_params  = {}
       @alibaba_method = nil
@@ -40,38 +39,38 @@ module AopClient
     end
 
     private
-      def timestamp_in_milliseconds
-        (Time.now.to_f * 1000).to_i.to_s
+
+    def timestamp_in_milliseconds
+      (Time.now.to_f * 1000).to_i.to_s
+    end
+
+    def generate_system_params
+      params = {
+        v:            config.version,
+        format:       config.format,
+        app_key:      config.app_key,
+        sign_method:  config.sign_method,
+        timestamp:    timestamp_in_milliseconds,
+        method:       "alibaba.icbu.#{alibaba_method}"
+      }
+
+      if @api.require_access_token?
+        fail "#{alibaba_method} needs access_token!" if config.access_token.blank?
+
+        params[:session] = config.access_token
       end
 
-      def generate_system_params
-        params = {
-          v:            config.version,
-          format:       config.format,
-          app_key:      config.app_key,
-          sign_method:  config.sign_method,
-          timestamp:    timestamp_in_milliseconds,
-          method:       "alibaba.icbu.#{alibaba_method}",
-        }
+      params[:sign] = generate_sign(params)
 
-        if @api.require_access_token?
-          raise "#{alibaba_method} needs access_token!" if config.access_token.blank?
+      params
+    end
 
-          params[:session] = config.access_token
-        end
+    def generate_sign(params)
+      params = params.clone.merge(request_params).sort.to_h
+      fields = params.map { |k, v| "#{k}#{v}" }.join
+      fields = config.app_secret + fields + config.app_secret
 
-        params[:sign] = generate_sign(params)
-
-        params
-      end
-
-      def generate_sign(params)
-        params = params.clone.merge(request_params)
-        params = params.sort.to_h
-        fields = params.map {|a,b| "#{a}#{b}"}.join
-        fields = config.app_secret + fields + config.app_secret
-
-        Digest::MD5.hexdigest(fields).upcase
-      end
+      Digest::MD5.hexdigest(fields).upcase
+    end
   end
 end
