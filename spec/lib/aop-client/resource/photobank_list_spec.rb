@@ -32,26 +32,23 @@ RSpec.describe AopClient::Resource::PhotobankList do
     end
   end
 
-  let(:hash) { {} }
-  subject    { described_class.new(hash) }
+  describe 'instance methods' do
+    let(:hash) do
+      {
+        current_page: 1,
+        group_id: 1,
+        location_type: 'SUB_GROUP',
+        extra_context: 'key:value'
+      }
+    end
+    subject    { described_class.new(hash) }
 
-  describe '#request_params' do
-    it 'when no attributes are set' do
+    it '#request_params' do
       expect(subject.request_params).to eq(hash)
     end
 
-    it 'else' do
-      hash.merge!(current_page: 1)
-      hash.merge!(group_id: 1)
-      hash.merge!(page_size: 1)
-      hash.merge!(location_type: 'SUB_GROUP')
-      hash.merge!(extra_context: 'key:value')
-
-      expect(subject.request_params).to eq(hash)
+    it '#require_access_token?' do
+      expect(subject.require_access_token?).to eq true
     end
-  end
-
-  it '#require_access_token?' do
-    expect(subject.require_access_token?).to eq true
   end
 end
