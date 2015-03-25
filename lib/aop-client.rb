@@ -5,7 +5,7 @@ require 'erb'
 require 'yaml'
 
 require 'validators/aop-client/comma_key_value_validator'
-require 'validators/aop-client/comma_numeric_validator'
+require 'validators/aop-client/array_id_validator'
 
 require 'aop-client/version'
 require 'aop-client/config'
