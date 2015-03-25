@@ -1,5 +1,4 @@
 RSpec.describe AopClient::ArrayIdValidator do
-
   subject { ArrayIdValidatorTest.new }
 
   it 'unaccepted "A"' do
@@ -51,23 +50,23 @@ RSpec.describe AopClient::ArrayIdValidator do
     }.to raise_error.with_message(/Value is invalid/)
   end
 
-  it 'unaccepted [1,2,"b"]' do
+  it 'unaccepted [1, 2, "b"]' do
     expect {
-      subject.value = [1,2,'b']
+      subject.value = [1, 2, 'b']
       subject.valid?
     }.to raise_error.with_message(/Value is invalid/)
   end
 
-  it 'unaccepted [1,2,0]' do
+  it 'unaccepted [1, 2, 0]' do
     expect {
-      subject.value = [1,2,0]
+      subject.value = [1, 2, 0]
       subject.valid?
     }.to raise_error.with_message(/Value is invalid/)
   end
 
-  it 'unaccepted [1,2,-1]' do
+  it 'unaccepted [1, 2, -1]' do
     expect {
-      subject.value = [1,2,-1]
+      subject.value = [1, 2, -1]
       subject.valid?
     }.to raise_error.with_message(/Value is invalid/)
   end
@@ -79,19 +78,20 @@ RSpec.describe AopClient::ArrayIdValidator do
     }.not_to raise_error
   end
 
-  it 'accepted [1,2]' do
+  it 'accepted [1, 2]' do
     expect {
-      subject.value = [1,2]
+      subject.value = [1, 2]
       subject.valid?
     }.not_to raise_error
   end
 
   private
-    class ArrayIdValidatorTest
-      include ActiveModel::Validations
 
-      attr_accessor :value
+  class ArrayIdValidatorTest
+    include ActiveModel::Validations
 
-      validates! :value, 'aop_client/array_id' => true
-    end
+    attr_accessor :value
+
+    validates! :value, 'aop_client/array_id' => true
+  end
 end

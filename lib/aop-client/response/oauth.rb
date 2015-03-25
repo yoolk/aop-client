@@ -1,7 +1,6 @@
 module AopClient
   module Response
     class OAuth < Base
-
       def initialize(response)
         if matched = response.body.match(/<p>Error Code: (.*)<br\/>Error Message: (.*)<\/p>/)
           @error = {
@@ -10,7 +9,6 @@ module AopClient
           }
         end
       end
-
     end
   end
 end

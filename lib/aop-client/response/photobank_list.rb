@@ -1,7 +1,6 @@
 module AopClient
   module Response
     class PhotobankList < Base
-
       def data
         return [] if super.nil?
 

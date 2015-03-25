@@ -21,8 +21,9 @@ module AopClient
                                   allow_blank: true
 
       def initialize(**options)
-        options = options.assert_valid_keys(:extra_context, :current_page, :group_id,
-          :location_type, :page_size)
+        options = options.assert_valid_keys(
+          :extra_context, :current_page, :group_id, :location_type, :page_size
+        )
 
         self.group_id      = options[:group_id]
         self.page_size     = options[:page_size]
@@ -47,7 +48,6 @@ module AopClient
       def require_access_token?
         true
       end
-
     end
   end
 end

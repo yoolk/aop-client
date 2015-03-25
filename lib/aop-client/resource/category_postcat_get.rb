@@ -21,7 +21,6 @@ module AopClient
 
         { post_cat_request: hash.to_json }
       end
-
     end
   end
 end

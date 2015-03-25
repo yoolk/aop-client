@@ -17,7 +17,7 @@ VCR.configure do |config|
   config.default_cassette_options = { record: :new_episodes }
 end
 
-def root_path(path='')
+def root_path(path = '')
   Pathname.new(File.join(File.dirname(__FILE__), path))
 end
 
