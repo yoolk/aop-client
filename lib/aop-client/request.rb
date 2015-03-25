@@ -1,11 +1,10 @@
 module AopClient
   class Request
-
-    def self.post(options={})
+    def self.post(options = {})
       new(options).run
     end
 
-    def initialize(options={})
+    def initialize(options = {})
       @url                = options[:url]
       @response_class     = options[:response_class]
       @params             = options[:system_params] || {}
@@ -26,19 +25,16 @@ module AopClient
       @response_class.new(Typhoeus.post(@url, options))
     end
 
-    def headers
-
-    end
-
     private
-      def set_headers
-        @headers = {
-          'Content-type'  =>  'application/x-www-form-urlencoded; charset=UTF-8',
-          'Cache-Control' =>  'no-cache',
-          'Connection'    =>  'Keep-Alive'
-        }
 
-        @headers.delete('Content-type') if @multipart_params.present?
-      end
+    def set_headers
+      @headers = {
+        'Content-type'  =>  'application/x-www-form-urlencoded; charset=UTF-8',
+        'Cache-Control' =>  'no-cache',
+        'Connection'    =>  'Keep-Alive'
+      }
+
+      @headers.delete('Content-type') if @multipart_params.present?
+    end
   end
 end
