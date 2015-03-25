@@ -1,5 +1,4 @@
 RSpec.describe AopClient::Resource::CategoryPostcatGet do
-
   describe 'validations' do
     it 'requires cat_id' do
       expect{
