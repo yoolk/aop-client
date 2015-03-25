@@ -5,10 +5,10 @@ module AopClient
       attr_reader :error, :data
 
       def initialize(response)
-        hash = JSON.parse(response.body)
+        hash = JSON.parse(response.body).deep_symbolize_keys
 
-        if hash['error_response']
-          @error = hash['error_response']
+        if hash[:error_response]
+          @error = hash[:error_response]
         else
           @data = hash
         end
