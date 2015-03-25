@@ -9,45 +9,24 @@ RSpec.describe AopClient::Resource::CategoryAttrvalueGet do
     it 'format_of attribute_id' do
       validator = described_class.validators_on(:attribute_id)[0]
 
-      expect(validator).to be_a AopClient::CommaNumericValidator
+      expect(validator).to be_a AopClient::ArrayIdValidator
       expect(validator.options).to eq({allow_blank: true, strict: true})
     end
 
     it 'format_of attribute_value_id' do
       validator = described_class.validators_on(:attribute_value_id)[0]
 
-      expect(validator).to be_a AopClient::CommaNumericValidator
+      expect(validator).to be_a AopClient::ArrayIdValidator
       expect(validator.options).to eq({allow_blank: true, strict: true})
     end
   end
 
   describe 'instance methods' do
-    let(:hash) { { cat_id: 0 } }
+    let(:hash) { { cat_id: 0, attribute_id: [1,2], attribute_value_id: [1,2] } }
     subject    { described_class.new(hash) }
 
-    describe '#request_params' do
-      it 'when no attribute_id and attribute_value_id' do
-        expect(subject.request_params).to eq({ attribute_value_request: hash.to_json })
-      end
-
-      it 'when has attribute_id' do
-        hash.merge!(attribute_id: '111,222')
-
-        expect(subject.request_params).to eq({ attribute_value_request: hash.to_json })
-      end
-
-      it 'when has attribute_value_id' do
-        hash.merge!(attribute_value_id: '111,222')
-
-        expect(subject.request_params).to eq({ attribute_value_request: hash.to_json })
-      end
-
-      it 'else' do
-        hash.merge!(attribute_id: '111,222')
-        hash.merge!(attribute_value_id: '111,222')
-
-        expect(subject.request_params).to eq({ attribute_value_request: hash.to_json })
-      end
+    it '#request_params' do
+      expect(subject.request_params).to eq({ attribute_value_request: hash.to_json })
     end
 
     it '#require_access_token?' do
@@ -69,10 +48,9 @@ RSpec.describe AopClient::Resource::CategoryAttrvalueGet do
       expect(subject.data[0].keys).to eq keys
     end
 
-    fit 'not leaf response', vcr: { cassette_name: 'CategoryAttrvalueGet/Responses/NotLeaf' } do
-      hash.merge!({ cat_id: 145, attribute_id: '351, 352' })
+    it 'not leaf response', vcr: { cassette_name: 'CategoryAttrvalueGet/Responses/NotLeaf' } do
+      hash.merge!({ cat_id: 145, attribute_id: [351, 352] })
 
-      binding.pry
       expect(subject.data).to eq []
       expect(subject.error[:code]).to     eq 15
       expect(subject.error[:msg]).to      eq 'Remote service error'
