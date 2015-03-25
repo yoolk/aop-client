@@ -30,11 +30,5 @@ module AopClient
     def response_class
       AopClient::Response::OAuth
     end
-
-    private
-      def timestamp_in_milliseconds
-        (Time.now.to_f * 1000).to_i.to_s
-      end
-
   end
 end
