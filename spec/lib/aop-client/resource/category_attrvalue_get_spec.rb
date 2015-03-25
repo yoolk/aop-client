@@ -48,14 +48,14 @@ RSpec.describe AopClient::Resource::CategoryAttrvalueGet do
       expect(subject.data[0].keys).to eq keys
     end
 
-    it 'not leaf response', vcr: { cassette_name: 'CategoryAttrvalueGet/Responses/NotLeaf' } do
-      hash.merge!({ cat_id: 145, attribute_id: [351, 352] })
+    it 'attr not found response', vcr: { cassette_name: 'CategoryAttrvalueGet/Responses/AttrNotFound' } do
+      hash.merge!({ cat_id: 145, attribute_id: [1,2] })
 
       expect(subject.data).to eq []
       expect(subject.error[:code]).to     eq 15
       expect(subject.error[:msg]).to      eq 'Remote service error'
-      expect(subject.error[:sub_code]).to eq 'isv.010002'
-      expect(subject.error[:sub_msg]).to  eq 'input catid is not leaf category'
+      expect(subject.error[:sub_code]).to eq 'isv.300000'
+      expect(subject.error[:sub_msg]).to  eq 'attribute value does not exist'
       expect(subject.error[:request_id]).to be_present
     end
   end

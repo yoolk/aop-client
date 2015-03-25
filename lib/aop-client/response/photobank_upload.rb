@@ -3,9 +3,9 @@ module AopClient
     class PhotobankUpload < Base
 
       def data
-        return [] if super.nil?
+        return {} if super.nil?
 
-        super['alibaba_icbu_category_postcat_get_response']['result_list']['post_cat']
+        super[:alibaba_icbu_photobank_upload_response][:upload_image_response]
       end
     end
   end

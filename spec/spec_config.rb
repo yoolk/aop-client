@@ -21,6 +21,10 @@ def root_path(path='')
   Pathname.new(File.join(File.dirname(__FILE__), path))
 end
 
+def open_file(file_name)
+  File.open(Rails.root.join('images', file_name), 'rb')
+end
+
 RSpec.configure do |config|
   config.after(:suite) do
     FileUtils.rm_rf(Dir[root_path('tmp')])
