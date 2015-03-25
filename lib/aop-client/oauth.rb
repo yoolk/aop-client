@@ -10,8 +10,11 @@ module AopClient
     end
 
     def exchange_code
-      response = Typhoeus.post(config.oauth_entry, headers: headers, params: system_params)
-      Response.new(response)
+      Request.post(
+        url: config.oauth_entry,
+        system_params: system_params,
+        response_class: response_class
+      )
     end
 
     def system_params
@@ -22,6 +25,10 @@ module AopClient
         grant_type:    'authorization_code',
         view:          'web'
       }
+    end
+
+    def response_class
+      AopClient::Response::OAuth
     end
 
     private

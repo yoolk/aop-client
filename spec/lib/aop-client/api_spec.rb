@@ -16,10 +16,6 @@ RSpec.describe AopClient::API, :with_rails do
     expect(subject.multipart_params).to eq({})
   end
 
-  it '#application_params' do
-    expect(subject.application_params).to eq({})
-  end
-
   it '#alibaba_method_class' do
     expect(subject.alibaba_method_class).to eq nil
   end

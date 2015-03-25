@@ -16,13 +16,13 @@ module AopClient
       @api            = alibaba_method_class.new(args)
       @system_params  = generate_system_params
 
-      Request.post({
+      Request.post(
         url: config.api_entry,
         system_params: system_params,
         request_params: request_params,
         multipart_params: multipart_params,
         response_class: @api.response_class
-      })
+      )
     end
 
     def alibaba_method_class
