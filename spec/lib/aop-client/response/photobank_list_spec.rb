@@ -3,6 +3,10 @@ RSpec.describe AopClient::Resource::PhotobankList, :with_rails do
   let(:api)   { AopClient::API.new(ENV['ALIBABA_ACCESS_TOKEN']) }
   subject     { api.call('photobank.list', hash) }
 
+  before do
+    allow(api).to receive(:timestamp_in_milliseconds).and_return('1427340633031')
+  end
+
   it 'success response', vcr: { cassette_name: 'PhotobankList/Responses/Success' } do
     keys = [:url]
 

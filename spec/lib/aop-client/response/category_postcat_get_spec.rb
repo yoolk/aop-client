@@ -3,6 +3,10 @@ RSpec.describe AopClient::Resource::CategoryPostcatGet, :with_rails do
   let(:api)  { AopClient::API.new }
   subject    { api.call('category.postcat.get', hash) }
 
+  before do
+    allow(api).to receive(:timestamp_in_milliseconds).and_return('1427340633031')
+  end
+
   it 'success response', vcr: { cassette_name: 'CategoryPostcatGet/Responses/Success' } do
     hash.merge!({ cat_id: 0 })
     keys = [:cat_id, :child_ids, :cn_name, :en_name, :leaf_cat, :parent_ids]

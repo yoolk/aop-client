@@ -3,6 +3,10 @@ RSpec.describe AopClient::Response::CategoryAttrGet, :with_rails do
   let(:api)  { AopClient::API.new }
   subject    { api.call('category.attr.get', hash) }
 
+  before do
+    allow(api).to receive(:timestamp_in_milliseconds).and_return('1427340633031')
+  end
+
   it 'success response', vcr: { cassette_name: 'CategoryAttrGet/Responses/Success' } do
     hash.merge!({ cat_id: 145 })
     keys = [:attr_id, :catid, :cn_name, :en_name, :key_attr, :locator, :order,

@@ -4,6 +4,10 @@ RSpec.describe AopClient::Resource::PhotobankUpload, :with_rails do
   let(:api)   { AopClient::API.new(ENV['ALIBABA_ACCESS_TOKEN']) }
   subject     { api.call('photobank.upload', hash) }
 
+  before do
+    allow(api).to receive(:timestamp_in_milliseconds).and_return('1427340633031')
+  end
+
   it 'success response', vcr: { cassette_name: 'PhotobankUpload/Responses/Success' } do
     hash.merge!({ file_name: 'test.jpg', image_bytes: image })
     keys = [:file_name, :photobank_url]
