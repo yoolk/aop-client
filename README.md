@@ -1,8 +1,8 @@
-# Aop::Client
+# Aop-Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/aop/client`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby SDK for Rails to support usage of Alibaba API.
 
-TODO: Delete this and the text above, and describe your gem
+Aop-Client is built to run along with Rails. It wraps usage for Alibaba Post Product API. Currently, it only supports [these api].
 
 ## Installation
 
@@ -20,9 +20,37 @@ Or install it yourself as:
 
     $ gem install aop-client
 
+## Rails
+
+Run install generator to get start.
+
+```ruby
+rails generate aop_client:install
+```
+
+The generator will create a YAML file at [`config/aop-client.yml`].
+
 ## Usage
 
-TODO: Write usage instructions here
+For better usage, please refer to [spec/response].
+
+```ruby
+# Initialize an API object
+api = AopClient::Api.new
+
+# Call Alibaba API
+# Omit 'alibaba.icbu' from alibaba method name
+# provide require information in a hash
+aop.call('category.postcat.get', { cat_id: 0 })
+
+# when success
+api.error #=> nil
+api.data  #=> [{ cat_id: 1, child_ids: [2, 3], en_name: 'Agriculture', ... }]
+
+# when error
+api.data  #=> []
+api.error #=> { code: 15, msg: 'Remote service error', sub_code: 'isv.100000', sub_msg: 'category does not exist', ... }
+```
 
 ## Development
 
@@ -37,3 +65,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+[`config/aop-client.yml`]:https://github.com/yoolk/aop-client/blob/master/lib/generators/aop-client/templates/aop-client.yml
+[these api]:http://open.taobao.com/us/portal/api_cat_detail.htm?scope_id=11611&category_id=102
+[spec/response]:https://github.com/yoolk/aop-client/tree/master/spec/lib/aop-client/response
